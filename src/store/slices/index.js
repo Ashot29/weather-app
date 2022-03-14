@@ -1,9 +1,9 @@
 import { combineReducers } from "redux";
-import cityWeatherReducer from "./cityWeather";
+import cityWeatherSlice from "./cityWeather";
 import testReducer from "./test"
 
 const rootReducer = combineReducers({
-    cityWeather: cityWeatherReducer,
+    cityWeather: cityWeatherSlice,
     test: testReducer
 });
 

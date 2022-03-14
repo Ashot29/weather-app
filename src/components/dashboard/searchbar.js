@@ -1,24 +1,29 @@
-import React, {useEffect, useRef, useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
-import weatherAPI from "../../services/api/weatherAPI";
-import {loadingStart, loadingEnd} from "../../store/slices/cityWeather";
+import React, { useRef } from "react";
+import { useDispatch } from "react-redux";
+import { getWeatherData } from "../../store/slices/cityWeather/cityWeatherAsync";
 
 export default function Searchbar() {
-    const searchInputref = useRef();
-    // const loading = useSelector((state) => state.cityWeather.loading)
-    const dispatch = useDispatch()
-    const [weather, setWeather] = useState({})
+  const searchInputref = useRef();
+  const dispatch = useDispatch();
 
-    useEffect(() => {
-        // weatherAPI.getCityWeather({q: 'Yerevan'})
-        //     .then(resp => setWeather(resp))
-        dispatch(loadingStart())
-        dispatch(loadingEnd())
-    }, [])
+//   const getWeather = (data) => dispatch(getWeatherData({q: data}))
 
-    return (
-        <div className="dashboard-searchbar-wrapper">
-            <input className="dashboard-searchbar" placeholder="Enter city name here" ref={searchInputref} />
-        </div>
-    );
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(getWeatherData({q: searchInputref.current.value}));
+    searchInputref.current.value = ''
+  };
+
+  return (
+    <form
+      className="dashboard-searchbar-wrapper"
+      onSubmit={handleSubmit}
+    >
+      <input
+        className="dashboard-searchbar"
+        placeholder="Enter city name here"
+        ref={searchInputref}
+      />
+    </form>
+  );
 }
