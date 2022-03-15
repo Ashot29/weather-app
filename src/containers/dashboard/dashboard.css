@@ -31,3 +31,23 @@
   text-align: center;
   width: 100%;
 }
+
+.weather-card {
+  background: rgba(255, 255, 255, 0.68);
+  margin-top: 30px;
+  width: 80%;
+  text-align: center;
+  padding: 30px;
+  box-sizing: border-box;
+  border-radius: 20px;
+}
+
+.temperature-wrapper {
+  font-size: 32px;
+  font-weight: 700;
+  margin: 10px 0;
+}
+
+.weather-description {
+  font-weight: bold;
+}

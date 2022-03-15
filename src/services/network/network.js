@@ -32,18 +32,12 @@ class NetworkService {
         return this.makeAPIRequest(url, options, 'PATCH');
     };
 
-    createUrl = (arg, queries = '') => {
+    createUrl = (arg) => {
         if (Array.isArray(arg)) {
             return [constants.network.API_URL, ...arg].join('/');
         }
         return arg;
     };
-
-    queryParams(params) {
-        return Object.keys(params)
-            .map(k => encodeURIComponent(k) + '=' + encodeURIComponent(params[k]))
-            .join('&');
-    }
 
     makeAPIRequest = (url, options = {}, method) => {
         return new Promise((resolve, reject) => {
@@ -70,7 +64,7 @@ class NetworkService {
                 //     ...options,
                 },
                 cancelToken: this.source.token,
-                // data: options.body || {},
+                body: options.body || {},
                 params: options.queryParams || '',
                 paramsSerializer: (params) => qs.stringify(params),
                 timeout: options?.timeout ?? 10000,
